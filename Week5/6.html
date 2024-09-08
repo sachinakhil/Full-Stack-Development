@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Number Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form id="mobileForm">
+        <label for="mobileNumber">Enter a mobile number:</label>
+        <input type="text" id="mobileNumber" name="mobileNumber" required>
+        <input type="submit" value="Check Number">
+        <div id="result"></div>
+    </form>
+
+    <script>
+        document.getElementById('mobileForm').addEventListener('submit', function(e) {
+            e.preventDefault()
+            
+            let mobileNumber = document.getElementById('mobileNumber').value
+            if (mobileNumber.startsWith('0')) {
+                mobileNumber = mobileNumber.slice(1)
+            }
+            const mobileRegex = /^[0-9]{9,10}$/;  // Allows for 9 or 10 digits
+            
+            const resultDiv = document.getElementById('result')
+            
+            if (mobileRegex.test(mobileNumber)) {
+                resultDiv.textContent = "Valid mobile number!"
+                resultDiv.style.color = "green"
+            } else {
+                resultDiv.textContent = "Invalid mobile number. Please enter a 9 or 10-digit number."
+                resultDiv.style.color = "red"
+            }
+        })
+    </script>
+</body>
+</html>
